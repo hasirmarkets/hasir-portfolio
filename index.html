@@ -1897,6 +1897,8 @@ if(contactForm) {
         error.style.display = 'none';
         contactForm.reset();
         btn.textContent = 'Sent ✓';
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({'event': 'contact_form_success'});
       } else {
         throw new Error('Form error');
       }
