@@ -1121,7 +1121,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="metric-label">Leads<br/>Generated</div>
       </div>
       <div class="metric-card">
-        <span class="metric-number" data-target="0" data-prefix="AED " data-suffix="" data-fixed="1.42">1.42</span>
+        <span class="metric-number" data-target="1.42" data-prefix="AED " data-suffix="" data-decimals="2">0.00</span>
         <div class="metric-label">Lowest CPM<br/>Achieved</div>
       </div>
       <div class="metric-card">
@@ -1285,7 +1285,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="timeline-badge">Freelance</div>
         <div class="timeline-title">Digital Marketing Specialist — Multi-Client</div>
         <div class="timeline-company">Independent · UAE & Saudi Arabia</div>
-        <div class="timeline-meta">2025 – 2026</div>
+        <div class="timeline-meta">2025 – Present</div>
         <div class="timeline-desc">Managed digital marketing independently for clients across UAE and Saudi Arabia — Meta Ads, Instagram/Facebook/TikTok management, LinkedIn personal branding, and reporting.</div>
         <ul class="timeline-highlights">
           <li>Saudi LinkedIn client → <strong>+231,450% impression growth</strong> in 90 days</li>
@@ -1315,7 +1315,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="timeline-badge">Internship</div>
         <div class="timeline-title">Digital Marketing Intern — SEO Specialist</div>
         <div class="timeline-company">Dotcom Creativez</div>
-        <div class="timeline-meta">May 2026 – June 2026 · 2 months · Kochi, India · Remote</div>
+        <div class="timeline-meta">May 2025 – June 2025 · 2 months · Kochi, India · Remote</div>
         <div class="timeline-desc">Contributing to end-to-end SEO for multiple clients at a full-service digital marketing agency across diverse industries.</div>
         <ul class="timeline-highlights">
           <li>Technical SEO audits — Core Web Vitals, crawlability, page speed</li>
@@ -1324,6 +1324,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <li>Schema markup (JSON-LD) implementation for rich snippets</li>
           <li>Performance tracking via Google Search Console and GA4</li>
         </ul>
+      </div>
+
+      <div class="timeline-item reveal" style="transition-delay:0.35s">
+        <div class="timeline-dot"></div>
+        <div class="timeline-badge">Education</div>
+        <div class="timeline-title">Diploma — Digital Marketing (AI Integrated)</div>
+        <div class="timeline-company">Dotin Digital Academy</div>
+        <div class="timeline-meta">Jan 2025 – Apr 2025 · Kochi, India</div>
       </div>
 
       <div class="timeline-item reveal" style="transition-delay:0.4s">
@@ -1343,10 +1351,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="timeline-item reveal" style="transition-delay:0.5s">
         <div class="timeline-dot"></div>
-        <div class="timeline-badge">Education</div>
-        <div class="timeline-title">Diploma — AI Integrated Digital Marketing</div>
-        <div class="timeline-company">Dotin Digital Academy</div>
-        <div class="timeline-meta">Sep 2025 – Jan 2026 · Dubai, UAE</div>
+        <div class="timeline-badge">Training</div>
+        <div class="timeline-title">MEP Training</div>
+        <div class="timeline-company">Tech Axis Design & EPC</div>
+        <div class="timeline-meta">Sep 2023 – Jul 2024 · Calicut</div>
+        <div class="timeline-desc">MEP design training bridging mechanical engineering fundamentals with practical project design work — part of the continuous technical-to-digital career path.</div>
       </div>
 
       <div class="timeline-item reveal" style="transition-delay:0.6s">
@@ -1858,7 +1867,8 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 function animateCounter(el) {
   const fixed = el.dataset.fixed;
   if (fixed) { el.textContent = (el.dataset.prefix||'') + fixed + (el.dataset.suffix||''); return; }
-  const target = parseInt(el.dataset.target);
+  const target = parseFloat(el.dataset.target);
+  const decimals = parseInt(el.dataset.decimals) || 0;
   const prefix = el.dataset.prefix || '';
   const suffix = el.dataset.suffix || '';
   const duration = 2800;
@@ -1867,8 +1877,9 @@ function animateCounter(el) {
     const elapsed = Date.now() - start;
     const progress = Math.min(elapsed / duration, 1);
     const ease = 1 - Math.pow(1 - progress, 3);
-    const current = Math.round(target * ease);
-    el.textContent = prefix + current.toLocaleString() + suffix;
+    const current = target * ease;
+    const display = decimals > 0 ? current.toFixed(decimals) : Math.round(current).toLocaleString();
+    el.textContent = prefix + display + suffix;
     if (progress < 1) requestAnimationFrame(update);
   }
   requestAnimationFrame(update);
